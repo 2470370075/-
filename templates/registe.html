@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>registe</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+{#<form action="" method="post" novalidate>#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    {{ form.error.name }}#}
+{#    {{ form.error.password }}#}
+{#    <p><input type="submit" value="提交"></p>#}
+{#</form>#}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-3">
+            <div style="height: 150px"></div>
+            <h1 style="text-align:center">注册</h1>
+            <form action="" method="post" novalidate>
+
+                {% csrf_token %}
+
+                {% for i in form %}
+
+                    <div class="form-group {% if i.phone.0 %}has-error{% endif %}">
+                        {{ i.label }}
+                        {{ i }}
+                        <span class="help-block">{{ i.phone.0 }}</span>
+                    </div>
+
+                {% endfor %}
+
+
+                <div class="form-group" style="text-align: center">
+                    <input class="btn btn-default" type="submit" value="提交">
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

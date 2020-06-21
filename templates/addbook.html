@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addbook</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<style>
+    #p1 {
+
+        color: #a41515;
+    }
+    #d1{
+
+        margin: 100px auto;
+        width: 600px;
+    }
+
+    #d2{
+        margin: 20px 250px;
+    }
+    #d3{
+        margin: 0 20px;
+    }
+
+    #d4{
+        margin: 0 20px;
+    }
+     #d6{
+        width: 300px;
+         height: 30px;
+    }
+</style>
+
+<div id='d1' class="panel panel-info">
+  <div class="panel-heading">添加书籍</div>
+  <div class="panel-body">
+   <form action="addbook.html" method="post">
+   {% csrf_token %}
+  <div id='d3' class="form-group">
+      <p></p>
+      <br>
+    <label for="exampleInputEmail1">书籍名称：</label>
+
+    <input type="text" class="form-control" id="exampleInputEmail1" name="book" >
+      <p id="p1">{{ error }}</p>
+
+  </div>
+       <br>
+   <div id="d4">
+  <label for="exampleInputEmail1">书籍名称：&nbsp
+        <select name="publisher" id="d6">
+            {% for i in publish %}
+                <option value="{{ i.id }}">{{ i.name }}</option>
+            {% endfor %}
+        </select>
+</label>
+   </div>
+
+<p></p>
+  <input id='d2' class="btn btn-default" type="submit" value="确认" >
+</form>
+  </div>
+</div>
+
+
+</body>
+
+
+<script src="/static/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</html>

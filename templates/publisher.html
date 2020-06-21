@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/sweetalert/sweetalert.css">
+    <style>
+        .sweet-alert > h2 {
+            padding: 10px;
+        }
+    </style>
+
+{% endblock %}
+
+
+
+{% block bb %}
+
+
+
+
+    <h1>书籍管理</h1>
+    <p></p>
+    <br>
+    <div class="panel panel-success">
+        <div class="panel-heading">出版社列表</div>
+        <div class="panel-body">
+
+
+            <p></p>
+
+            <table border="1" class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in publish %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.name }}</td>
+
+                        <td>
+                            <input type="button" class="c1" value="删除">
+                            <input type="button" class="c2" value="编辑">
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block c2 %}
+    active
+{% endblock %}
+
+
+{% block js %}
+    <script src="/static/jquery-3.2.1.min.js"></script>
+    <script src="/static/sweetalert/sweetalert.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $('.c1').on('click', function () {
+            var p = $(this).parent().parent();
+            var id = p.children().eq(0).text();
+            swal({
+                    title: "Are you sure?",
+                    text: "你其实只是在前端删了!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel plx!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function () {
+                    $.ajax({
+                        url: '/ajaxdel/',
+                        type: 'get',
+                        data: {'id': id},
+                        success: function () {
+                            swal("Deleted!", "刷新一下就又有了.", "success");
+                            p.remove()
+
+                        }
+                    })
+
+                });
+        });
+        $('.c2').on('click', function () {
+            var p = $(this).parent().parent();
+            var name = p.children().eq(1);
+            swal({
+                title: "An input!",
+                text: "Write something interesting:",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                inputPlaceholder: "Write something"
+            }, function (inputValue) {
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("You need to write something!");
+                    return false
+                }
+                name.html(inputValue);
+                swal("没有卵用！", "You wrote: " + inputValue, "success");
+            });
+
+
+        })
+
+    </script>
+
+
+
+
+
+
+{% endblock %}

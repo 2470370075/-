@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- saved from url=(0082)file:///C:/Users/Administrator/Desktop/Dashboard%20Template%20for%20Bootstrap.html -->
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">
+    <title>Dashboard Template for Bootstrap</title>
+    {% load static %}
+    <link href="{% static  'Dashboard Template for Bootstrap2_files/bootstrap_3.3.7_css_bootstrap.min.css' %}"
+          rel="stylesheet">
+    <link href="/static/Dashboard Template for Bootstrap2_files/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/static/Dashboard Template for Bootstrap2_files/dashboard.css" rel="stylesheet">
+    <script src="/static/Dashboard Template for Bootstrap2_files/ie-emulation-modes-warning.js.下载"></script>
+
+
+</head>
+
+<body>
+
+
+<style>
+    #d6 {
+        position: absolute;
+        left: 1200px;
+        top: 600px;
+        height: 100px;;
+    }
+</style>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="/welcome/">Book Manage System</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <div style="font-size:20px; font-family: 'Adobe 楷体 Std R' ; float: right;margin-top:14px;margin-right: 40px">
+                <a href="/logout/" style="color: #f5dd5d ">注销登录</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="/book/">书籍管理 <span class="sr-only">(current)</span></a></li>
+                <li><a href="/publish/">出版社管理</a></li>
+                <li><a href="/author/">作者管理</a></li>
+
+            </ul>
+
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1>书籍管理</h1>
+            <p></p>
+            <br>
+            <div class="panel panel-success">
+                <div class="panel-heading">书籍列表</div>
+                <div class="panel-body">
+
+                    <a class="btn btn-danger" href="/addbook/" role="button">添加书籍</a>
+                    <p></p>
+
+                    <table border="1" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>publisher</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in book %}
+                            <tr>
+                                <td>{{ i.id }}</td>
+                                <td>{{ i.name }}</td>
+                                <td>{{ i.pid.name }}</td>
+                                <td>
+                                    <a href="/deletebook/?id={{ i.id }}">删除</a>
+                                    <a href="/editbook/?id={{ i.id }}">编辑</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <nav aria-label="Page navigation" style="float: right;margin-right: 20px">
+                <ul class="pagination">
+                    {{ html|safe }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/Dashboard Template for Bootstrap2_files/jquery_1.12.4_jquery.min.js.下载"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/static/Dashboard Template for Bootstrap2_files/bootstrap_3.3.7_js_bootstrap.min.js.下载"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="/static/Dashboard Template for Bootstrap2_files/holder.min.js.下载"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/static/Dashboard Template for Bootstrap2_files/ie10-viewport-bug-workaround.js.下载"></script>
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #eee;
+        }
+
+        .block {
+            height: 200px;
+        }
+
+        form {
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        #con{
+           width: 100% ;
+        }
+    </style>
+</head>
+<body>
+
+<div id="con" class="container">
+    <div class="block"><div style="float: right"><a href="/registe/">注册</a></div></div>
+    <div class="row">
+        <h1>请登录</h1>
+        <br>
+        <form action=""  class="col-md-4 col-md-offset-4" method="post" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="inputEmail3" style="" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-9">
+                    <input  value="" class="form-control" name="email" id="d1" >
+                    <p id="error" style="margin-top: 10px"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-9">
+                    <input  value="" name="password" class="form-control" id="inputPassword3">
+                    <p></p><p class="text-danger text-center">{{ error }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> 记住我
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-9">
+                    <button type="submit" class="btn btn-primary btn-block">登录</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$("#d1").on('blur',function () {
+
+    var username=$('#d1').val();
+    $.ajax({
+        url: '/logincheck/',
+        type:'get',
+        data:{'username':username},
+        success:function (arg) {
+            $('#error').text(arg).css('color','red')
+
+        }
+    })
+
+})
+</script>
+</body>
+</html>

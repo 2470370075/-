@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userinfo</title>
+</head>
+<body>
+    <a href="/add/">添加</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>id</th>
+                <th>name</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in userinfo %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td><a href="/delete/?id={{ user.id }}">删除</a>
+                    <a href="/edit/?id={{ user.id }}">编辑</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

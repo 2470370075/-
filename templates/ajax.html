@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+<h1>&nbspAJAX</h1>
+<br>
+<div style="margin-left: 20px">
+    <input type="text" id="d1">
+    <div style="display: inline">+</div>
+    <input type="text" id="d2">
+    <div style="display: inline">=</div>
+    <input type="text" id="d3">
+    <input type="button" value="AJAX计算get" id="b1">
+    <input type="button" value="AJAX计算post" id="b6">
+    <input type="button" value="异步AJAX" id="d5">
+    {% csrf_token %}
+</div>
+
+</body>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="/static/jquery-3.2.1.min.js"></script>
+
+<script>
+    $("#b1").on("click", function () {
+        var i1 = $('#d1').val();
+        var i2 = $('#d2').val();
+
+        $.ajax({
+            url: "/ajaxadd/",
+            type: "get",
+            data: {'i1': i1, "i2": i2},
+            success: function (arg) {
+                $('#d3').val(arg)
+
+            }
+
+        })
+
+    });
+
+    $("#d5").on('click', function () {
+        $.ajax({
+            url: '/ajaxmany/',
+            type: 'get',
+            success: function (arg) {
+                var ele = document.createElement("img");
+                ele.src = arg;
+                $("#d5").after(ele)
+            }
+        })
+    });
+
+
+    $("#b6").on("click", function () {
+        var i1 = $('#d1').val();
+        var i2 = $('#d2').val();
+        $.ajax({
+            url: "/ajaxadd/",
+            type: "get",
+            data: {'i1': i1, "i2": i2, 'csrf_token': $("[name='csrfmiddlewaretoken']").val()},
+            success: function (arg) {
+                $('#d3').val(arg)
+            }
+        })
+    });
+</script>
+
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

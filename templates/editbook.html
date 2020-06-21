@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>editbook</title>
+</head>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<body>
+<style>
+    #d1 {
+
+        margin: 100px auto;
+        width: 600px;
+    }
+
+    #d4 {
+        margin: 10px 250px;
+    }
+
+    #d3 {
+        margin: 20px 20px;
+        font-weight: bolder;
+    }
+
+    #d2 {
+        margin: 0 20px;
+    }
+
+    #d6 {
+        width: 200px;
+        height: 30px;
+    }
+
+
+</style>
+
+<div id='d1' class="panel panel-info">
+    <div id="" class="panel-heading">编辑书籍</div>
+    <div class="panel-body">
+        <form action="editbook.html" method="post">
+            {% csrf_token %}
+            <div id="d3">书籍名字：
+                <input type="text" name='bookname' value="{{ edit_book.name }}">
+            </div>
+
+            <div id="d2">
+                <label>
+                    <input type="text" name='id' value="{{ edit_book.id }}" style='display:none'>
+                    <p>出版社名字：
+                        <select name="publisher" id="d6">
+                            {% for i in publish %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                </label></div>
+
+            <div id="d4"><input id='d2' class="btn btn-default" type="submit" value="确认"></div>
+
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

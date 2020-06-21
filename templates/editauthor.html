@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addauthor</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<style>
+    #d2 {
+        margin-left: 20px;
+    }
+
+    #d6 {
+        width: 540px;
+    }
+
+    #d1 {
+        width: 600px;
+        margin: 200px auto;
+    }
+
+    #d3 {
+        margin-left: 250px;
+    }
+</style>
+
+<div id='d1' class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">添加作者</h3>
+    </div>
+    <div class="panel-body">
+        <form action="addauthor.html" method="post">
+
+            {% csrf_token %}
+            <div id="d2" class="form-group">
+                <p></p>
+                <label for="exampleInputEmail1">作者姓名</label>
+                <input type="text" class="form-control" name="author_name" value="{{ edit_author.name }}">
+                <input type="text" name="author_id" value="{{ edit_author.id }} " style="display:none">
+            </div>
+
+
+            <div id="d2" class="form-group">
+                <p></p>
+                <label>写的书 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp</label>
+                <select multiple name="books" id="d6">
+                    {% for i in books %}
+                        {% if i in edit_author.book.all %}
+                            <option selected value="{{ i.id }}">{{ i.name }}</option>
+                        {% else %}
+                            <option value="{{ i.id }}">{{ i.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <p></p>
+
+                <input id="d3" class="btn btn-default" type="submit">
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+</div>
+
+
+<script src="/static/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

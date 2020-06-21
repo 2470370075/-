@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+
+</head>
+<body>
+<div style="height: 100px"></div>
+<div class="container">
+    <div class="col-md-4 col-md-offset-4">
+        <form novalidate action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for i in reform %}
+                <div class="form-group">
+                    <label for="{{ i.id_for_label }}">{{ i.label }}</label>
+                    {{ i }}
+                    <span class="help-block">{{ i.errors.0 }}</span>
+                </div>
+            {% endfor %}
+
+            <div class="form-group">
+                <label for="dile">头像   &nbsp &nbsp&nbsp <img id='head_photo' src="/static/item1.png" style="height: 80px;width:80px"></label>
+                <input  type="file" name="head_photo" style="display: none" id="dile">
+            </div>
+            <div style="text-align: center">
+                <input class="btn btn-default" type="button" id="button" value="注册">
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+<script src="/static/jquery-3.3.1.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+    $("#dile").change(function () {
+
+        var filereader=new FileReader();
+
+        filereader.readAsDataURL(this.files[0]);
+        filereader.onload=function(){
+            $('#head_photo').attr('src',filereader.result);
+        }
+    });
+
+
+
+    $('#button').click(function () {
+
+        var username=$('#id_username').val();
+        var password=$('#id_password').val();
+        var password2=$('#id_password2').val();
+        var email=$('#id_email').val();
+        $.ajax({
+            url:'/blogregiste/',
+            type:'post',
+            data:{username:username,
+                password:password,
+                password2:password2,
+                email:email,
+                csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()},
+            success:function (arg) {
+                console.log(arg.status);
+                if (arg.status) {
+                      $.each(arg.msg,function (k,v) {
+                        $('#id_'+k).next().text(v[0]).parent().addClass('has-error');
+
+                    })
+
+                }
+                else {
+                  console.log(1);
+
+                    location.href = arg.msg;
+                }
+
+
+
+            }
+            }
+
+        );
+
+    $('form input').focus(function () {
+        $(this).parent().removeClass('has-error')
+
+    })
+    })
+
+
+
+
+</script>
+
+</body>
+</html>
